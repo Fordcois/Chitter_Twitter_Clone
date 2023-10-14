@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+.btn-group button {
+    background-color: #df3f3e;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+    input[type=button], input[type=submit], input[type=reset] {
+        background-color: #df3f3e;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition-duration: 0.4s;
+      }
+      input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+  
+}
+
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+.btn-group button:hover {
+    background-color: #e4605f; 
+    color: white;}
+</style>
+<p><img alt="" src="/static/chitterLogo.png" width="317" height="117"/><span style="font-size:48px">
+
+<p><span style="color:#df3f3e"><strong>Welcome to Chitter - The conversational nest of the world!</strong></span></p>
+
+<div class="btn-group">
+    <a href='/newcheep' ><button>Post a new Cheep</button></a>
+    <a href='/newuser' ><button>Register</button></a>
+    <a href='/login' ><button>Switch User</button></a>
+  </div> 
+
+<p><span style="color:#df3f3e"><strong>Welcome {{user.name}}! What's the flock been saying Today?</strong></span></p>
+
+{% for cheep in cheeps %}
+<p><strong>{{cheep.content}}</strong><br />
+<span style="color:#df3f3e">- {{cheep.username}}</span> posted on <span style="color:#df3f3e">{{cheep.time_posted}}</span></p>
+{% endfor %}
+<p>&nbsp;</p>

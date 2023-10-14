@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+    input[type=button], input[type=submit], input[type=reset] {
+        background-color: #df3f3e;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition-duration: 0.4s;
+      }
+
+      input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+  background-color: #e4605f; 
+  color: white;
+}
+
+input[type=text] {
+  border: 2px solid #e4605f;
+  border-radius: 4px;
+}
+
+
+</style>
+<p><img alt="" src="/static/chitterLogo.png" width="317" height="117"/><span style="font-size:48px"></span>
+  </head>
+  <body>
+
+    <h1>Register an Account </h1>
+
+    <form action="/newcheep" method="post">
+    
+    <label for="content">Whats on your Mind?</label><br>
+    <textarea id="content" name="content" rows="4" cols="50" style="border: 2px solid #e4605f">Post your thoughts here...</textarea>
+
+    <p>
+    <label for='time_posted' >Date Posted (YYYY-MM-DD)</label><br>
+    <input type="text" name="time_posted" id ='time_posted'>
+    </p>
+    
+        <input type="submit" value="Cheep">
+    </ul>
+    </form>
+    <!-- This is a link to another page. -->
+    <br>
+    <a href="/"><input type="button" value="back"></a>
+  </body>
+</html>
+
+
+
+
+
+
