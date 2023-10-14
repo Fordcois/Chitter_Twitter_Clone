@@ -1,64 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-    input[type=button], input[type=submit], input[type=reset] {
-        background-color: #df3f3e;
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        border-radius: 8px;
-        cursor: pointer;
-        transition-duration: 0.4s;
-      }
+    <title>Login</title>
+    <link href="/static/stylesheet.css" rel="stylesheet">
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class="header">
+        <img alt="chitter Logo" src="/static/chitter_logo_white_large.png" width="317" height="117" />
+    </div>
 
-      input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
-  background-color: #e4605f; 
-  color: white;
-}
-
-input[type=text] {
-  border: 2px solid #e4605f;
-  border-radius: 4px;
-}
-</style>
-<p><img alt="" src="/static/chitterLogo.png" width="317" height="117"/><span style="font-size:48px"></span>
-  </head>
-  <body>
-
-    <h1>Register an account! </h1>
-
+    <h1>Register an account</h1>
+    
+    {% for error in errors %}
+    <span style="color:#df3f3e">{{error}}<br></span>
+    {% endfor %}
+    <div class="content">
     <form action="/newuser" method="post">
-    <p>
-    <label for="Name">Name</label><br>
-    <input type="text" name="name" id ='Name'>
-  </p>
-  <p>
-    <label for="email">Email Address</label><br>
-    <input type="text" name="email" id ='email'>
-  </p>
-  <p>
-    <label for="username">Username</label><br>
-    <input type="text" name="username" id ='username'>
-  </p>
-
-  <p>
-    <label for="password">Password</label><br>
-    <input type="text" name="password" id ='password'>
-</p>
-
-    
-    
+        <p>
+            <label for="Name">Name</label><br>
+            <input type="text" name="name" id='Name'>
+        </p>
+        <p>
+            <label for="email">Email Address</label><br>
+            <input type="text" name="email" id='email'>
+        </p>
+        <p>
+            <label for="username">Username</label><br>
+            <input type="text" name="username" id='username'>
+        </p>
+        <p>
+            <label for="password">Password</label><br>
+            <input type="text" name="password" id='password'>
+        </p>
 
         <input type="submit" value="Register">
-    </ul>
     </form>
     <br>
-<a href="/"><input type="button" value="back"></a>
-  </body>
+    <a href="/"><input type="button" value="back"></a>
+    </div>
+</body>
 </html>

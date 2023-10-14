@@ -6,14 +6,17 @@
     background-color: #df3f3e;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 10px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 1px 2px;
     border-radius: 8px;
     cursor: pointer;
+}
+.btn-group button:hover {
+    background-color: #e4605f;
 }
     input[type=button], input[type=submit], input[type=reset] {
         background-color: #df3f3e;
@@ -29,36 +32,93 @@
         cursor: pointer;
         transition-duration: 0.4s;
       }
-      input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
-  
+
+.bubble-container {
+    display: flex;
+    justify-content: center;
 }
 
-.btn-group:after {
-  content: "";
-  clear: both;
-  display: table;
+.bubble {
+  --r: 25px; /* the radius */
+  --t: 30px; /* the size of the tail */
+  
+  max-width: 400px;
+  min-width: 400px;
+  padding: calc(2*var(--r)/3);
+  -webkit-mask: 
+    radial-gradient(var(--t) at var(--_d) 0,#0000 98%,#000 102%) 
+      var(--_d) 100%/calc(100% - var(--r)) var(--t) no-repeat,
+    conic-gradient(at var(--r) var(--r),#000 75%,#0000 0) 
+      calc(var(--r)/-2) calc(var(--r)/-2) padding-box, 
+    radial-gradient(50% 50%,#000 98%,#0000 101%) 
+      0 0/var(--r) var(--r) space padding-box;
+  background: linear-gradient(135deg,#df3f3e,#e4605f) border-box;
+  color: #fff;
+  text-align: left;
 }
-.btn-group button:not(:last-child) {
-  border-right: none; /* Prevent double borders */
+.left {
+  --_d: 0%;
+  border-left: var(--t) solid #0000;
+  margin-right: var(--t);
+  place-self: start;
 }
-.btn-group button:hover {
-    background-color: #e4605f; 
-    color: white;}
+.right {
+  --_d: 100%;
+  border-right: var(--t) solid #0000;
+  margin-left: var(--t);
+  place-self: end;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  gap: 15px;
+  font-family: system-ui, sans-serif;
+  font-size: 15px;
+}
+.bubble-content p {
+    margin: 0px;
+}
+</style>
+</head>
 </style>
 <p><img alt="" src="/static/chitterLogo.png" width="317" height="117"/><span style="font-size:48px">
 
 <p><span style="color:#df3f3e"><strong>Welcome to Chitter - The conversational nest of the world!</strong></span></p>
-
+{% if user != None%}
 <div class="btn-group">
-    <a href='/newcheep' ><button>Post a new Cheep</button></a>
-    <a href='/newuser' ><button>Register</button></a>
-    <a href='/login' ><button>Switch User</button></a>
+<a href='/newcheep' ><button>Post a new Cheep</button></a>
+</div>
+{% else %}
+  <div class="btn-group">
+  <a href='/newuser' ><button>Register</button></a>
+  <a href='/login' ><button>Log in</button></a>
   </div> 
 
-<p><span style="color:#df3f3e"><strong>Welcome {{user.name}}! What's the flock been saying Today?</strong></span></p>
+{% endif %}
+{% if user != None%}
+<span style="color:#df3f3e">Currently Logged in as: {{user.username}}  <a href="/logout"><i>(Log Out)</a></i><br></span>
+<p><span style="color:#df3f3e"><strong>Welcome {{user.name}}! 
+{% else %}
+  Hello Hello, you're not logged in 
+
+{% endif %}
+  What's the flock been saying Today?</strong></span></p>
 
 {% for cheep in cheeps %}
-<p><strong>{{cheep.content}}</strong><br />
-<span style="color:#df3f3e">- {{cheep.username}}</span> posted on <span style="color:#df3f3e">{{cheep.time_posted}}</span></p>
+    {% set row_class = 'bubble left' if loop.index is even else 'bubble right' %}
+    <li class="{{ row_class }}">
+      <div class="bubble-content">
+        <p style="text-align: {{ 'left' if loop.index is even else 'right' }};">
+          <b>{{ cheep.content }}<br></b>
+            <i><b>{{ cheep.username }}</b>
+            <span style="color:#ddc9c9"> posted on {{ cheep.time_posted }}</span>
+          </i>
+        </p>
+      </div>
+    </li>
 {% endfor %}
+
 <p>&nbsp;</p>

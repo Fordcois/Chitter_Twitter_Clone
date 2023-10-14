@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 #####Log in Information Stored Here ####
 Bruno=User(1,'Bruno Guimaraes','bruno.G@nufc.sa','Brun0G','password')
-logged_in = Bruno
+logged_in = None
 
 
 
@@ -47,15 +47,43 @@ def register_new_user():
     email=request.form['email']
     username=request.form['username']
     password=request.form['password']
-    userrepo.create(name,email,username,password)
+    errors_with_registration = userrepo.Registration_Errors(email,username)
+    if errors_with_registration == None:
+        userrepo.create(name,email,username,password)
+    else:
+        return render_template ('newuser.html', errors=errors_with_registration)
     return redirect ('/')
+
 
 
 
 
 @app.route('/login', methods=['get']) # Directs you to the Login Page
 def direct_to_login_page():
-    return render_template('login.html')
+    return render_template('login_page.html')
+
+@app.route('/login', methods=['POST']) # Logsin
+def log_in_to_chitter():
+    global logged_in
+    userrepo=UserRepository(get_flask_database_connection(app))
+    username=request.form['username']
+    password=request.form['password']
+    ReturnedAccount=userrepo.find(username)
+    if ReturnedAccount.password == password:
+        logged_in = ReturnedAccount
+    else:
+        print ('Invalid Credentials')
+    return redirect ('/')
+
+@app.route('/logout', methods=['GET']) #Logout Code ######### 
+def Log_out():
+    global logged_in
+    logged_in = None
+    return redirect ('/')
+
+@app.route('/style', methods=['GET']) #CSS Trials
+def look_at_css():
+    return render_template ('styleplayground.html')
 
 # == End Example Code ==
 
@@ -64,3 +92,4 @@ def direct_to_login_page():
 # if started in test mode.
 if __name__ == '__main__':
     app.run(debug=True, port=int(os.environ.get('PORT', 5001)))
+
