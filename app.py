@@ -4,6 +4,7 @@ from lib.database_connection import get_flask_database_connection
 from lib.cheep_repository import CheepRepository
 from lib.user import User
 from lib.user_repository import UserRepository
+from datetime import datetime
 
 # Create a new Flask app
 app = Flask(__name__)
@@ -14,7 +15,8 @@ logged_in = None
 
 
 
-# == Your Routes Here ==
+
+
 @app.route('/', methods=['GET']) #Index Page
 def index():
     cheeprepo=CheepRepository(get_flask_database_connection(app))
@@ -27,14 +29,10 @@ def submit_new_cheep():
     cheeprepo=CheepRepository(get_flask_database_connection(app))
 
     content=request.form['content']
-    time_posted=request.form['time_posted']
+    time_posted=datetime.now()
     poster_id=logged_in.id
     cheeprepo.create(content,time_posted,poster_id)
     return redirect ('/')
-
-@app.route('/newcheep', methods=['GET'])
-def new_cheep_page():
-    return render_template ('newcheep.html')
 
 @app.route('/newuser', methods=['GET'])
 def new_user_page():
@@ -62,7 +60,7 @@ def register_new_user():
 def direct_to_login_page():
     return render_template('login_page.html')
 
-@app.route('/login', methods=['POST']) # Logsin
+@app.route('/login', methods=['POST']) # Login
 def log_in_to_chitter():
     global logged_in
     userrepo=UserRepository(get_flask_database_connection(app))
@@ -81,9 +79,6 @@ def Log_out():
     logged_in = None
     return redirect ('/')
 
-@app.route('/style', methods=['GET']) #CSS Trials
-def look_at_css():
-    return render_template ('styleplayground.html')
 
 # == End Example Code ==
 

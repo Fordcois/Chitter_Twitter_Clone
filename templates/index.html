@@ -1,124 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-.btn-group button {
-    background-color: #df3f3e;
-    border: none;
-    color: white;
-    padding: 10px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 1px 2px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-.btn-group button:hover {
-    background-color: #e4605f;
-}
-    input[type=button], input[type=submit], input[type=reset] {
-        background-color: #df3f3e;
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        border-radius: 8px;
-        cursor: pointer;
-        transition-duration: 0.4s;
-      }
-
-.bubble-container {
-    display: flex;
-    justify-content: center;
-}
-
-.bubble {
-  --r: 25px; /* the radius */
-  --t: 30px; /* the size of the tail */
-  
-  max-width: 400px;
-  min-width: 400px;
-  padding: calc(2*var(--r)/3);
-  -webkit-mask: 
-    radial-gradient(var(--t) at var(--_d) 0,#0000 98%,#000 102%) 
-      var(--_d) 100%/calc(100% - var(--r)) var(--t) no-repeat,
-    conic-gradient(at var(--r) var(--r),#000 75%,#0000 0) 
-      calc(var(--r)/-2) calc(var(--r)/-2) padding-box, 
-    radial-gradient(50% 50%,#000 98%,#0000 101%) 
-      0 0/var(--r) var(--r) space padding-box;
-  background: linear-gradient(135deg,#df3f3e,#e4605f) border-box;
-  color: #fff;
-  text-align: left;
-}
-.left {
-  --_d: 0%;
-  border-left: var(--t) solid #0000;
-  margin-right: var(--t);
-  place-self: start;
-}
-.right {
-  --_d: 100%;
-  border-right: var(--t) solid #0000;
-  margin-left: var(--t);
-  place-self: end;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  display: grid;
-  place-content: center;
-  gap: 15px;
-  font-family: system-ui, sans-serif;
-  font-size: 15px;
-}
-.bubble-content p {
-    margin: 0px;
-}
-</style>
+    <title>Chitter</title>
+    
+    <link href="/static/stylesheet.css" rel="stylesheet">
+    <meta charset="UTF-8">
 </head>
-</style>
-<p><img alt="" src="/static/chitterLogo.png" width="317" height="117"/><span style="font-size:48px">
 
-<p><span style="color:#df3f3e"><strong>Welcome to Chitter - The conversational nest of the world!</strong></span></p>
-{% if user != None%}
-<div class="btn-group">
-<a href='/newcheep' ><button>Post a new Cheep</button></a>
-</div>
-{% else %}
-  <div class="btn-group">
-  <a href='/newuser' ><button>Register</button></a>
-  <a href='/login' ><button>Log in</button></a>
-  </div> 
+<body>
+    <div class="header">
+        <img alt="Chitter Logo" src="/static/chitter_logo_white_large.png" width="317" height="117" />
+    </div>
+   
+    <div class="content">
 
-{% endif %}
-{% if user != None%}
-<span style="color:#df3f3e">Currently Logged in as: {{user.username}}  <a href="/logout"><i>(Log Out)</a></i><br></span>
-<p><span style="color:#df3f3e"><strong>Welcome {{user.name}}! 
-{% else %}
-  Hello Hello, you're not logged in 
 
-{% endif %}
-  What's the flock been saying Today?</strong></span></p>
+<!-- If Logged in! -->
+    {% if user != None%}
+        <p style="margin-bottom:0;color:#df3f3e; font-size:48px"><strong>Welcome {{user.name}}!</strong></span></span></p>
+        <p style="margin : 0; padding-top:0;">Logged in as: <span style="color:#df3f3e">{{user.username}}</span> <span style="color:#999999"><a href="/logout">(Log Out)</a></span></strong></p>
+        <p><strong><span style="color:#df3f3e">Welcome to Chitter - The conversational nest of the internet</span></strong></p>
+<!-- This is the cheep Box -->
+    <form action="/newcheep" method="post">
+    
+    <textarea  id='content' name="content" placeholder="What's on your Mind...." cols="10" rows="3"></textarea>
+    <br>
+    <br>
+    <input type="submit" value="Cheep">
+    </form>
+</ul>
 
-{% for cheep in cheeps %}
-    {% set row_class = 'bubble left' if loop.index is even else 'bubble right' %}
-    <li class="{{ row_class }}">
-      <div class="bubble-content">
-        <p style="text-align: {{ 'left' if loop.index is even else 'right' }};">
-          <b>{{ cheep.content }}<br></b>
-            <i><b>{{ cheep.username }}</b>
-            <span style="color:#ddc9c9"> posted on {{ cheep.time_posted }}</span>
-          </i>
-        </p>
-      </div>
-    </li>
-{% endfor %}
 
-<p>&nbsp;</p>
+
+<!-- If Not Logged in  -->
+    {% else %}
+    <p><span style="color:#df3f3e"><span style="font-size:48px"><strong>Welcome to Chitter!</strong></span></span></p>
+    <b><p style="margin-left:0; margin-right:0">You need to <a href="/newuser">Register to share your Cheeps</a></b></p>
+    <p style="margin-left:0; margin-right:0">Already Registered? <a href="/login"><b>Sign in</b></a></p>
+    {% endif %}
+    <!-- Information regardless of Log-in status -->
+        <p><strong><span style="color:#df3f3e">What's the rest of the nest singing today ...</span></strong></p>
+        <!-- Speech Bubbles Go Here -->
+        {% for cheep in cheeps %}
+            {% set row_class = 'bubble left' if loop.index is even else 'bubble right' %}
+                <li class="{{ row_class }}">
+                <div style="text-align: {{ 'left' if loop.index is even else 'right' }}">
+                <b> {{ cheep.content }} </b>
+                <br>
+                <i>- {{ cheep.username }}<span style="color:#ddc9c9"><br>{{ cheep.time_posted.strftime('%H:%M on %d-%m-%Y ') }} </span></i>
+            </li>
+            <br>
+        {% endfor %}
+    </div>
+</body>
+</html>
+

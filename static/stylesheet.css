@@ -1,21 +1,36 @@
-/* Style the body */
-body {
+ /* Style the body */
+ body {
   font-family: Arial;
-  margin: 0;
+  text-align: center;
+  margin: 0px;
+}
+/* Links */
+a {
+  color: #df3f3e
+}
+textarea {
+  border: 2px solid #e4605f;
+  width: 400px;
+  height: 100px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
 }
 
 /* Header/Logo Title */
 .header {
-  padding: 2px;
-  text-align: center;
-  background: #df3f3e;
-  color: white;
-  font-size: 20px;
+  background-color: #df3f3e; /* Red bar color */
+  width: 100%;
+  padding: 4px; /* Adjust the padding as needed */
 }
 
-/* Page Content */
 .content {
-  padding: 20px;
+  margin-top: 0px; /* Gap below the red bar */
+  padding: 5px; /* Add padding to the content area as desired */
+  text-align: center;
 }
 
 /* Input Fields */
@@ -53,4 +68,37 @@ input[type=submit], input[type=button] {
 
 input[type=submit]:hover, input[type=button]:hover {
   background-color: #e4605f;
+}
+
+/* Bubbles! */
+
+.bubble {
+  --r: 25px; /* the radius */
+  --t: 30px; /* the size of the tail */
+  
+  max-width: 400px;
+  min-width: 400px;
+  padding: calc(2*var(--r)/3);
+  -webkit-mask: 
+    radial-gradient(var(--t) at var(--_d) 0,#0000 98%,#000 102%) 
+      var(--_d) 100%/calc(100% - var(--r)) var(--t) no-repeat,
+    conic-gradient(at var(--r) var(--r),#000 75%,#0000 0) 
+      calc(var(--r)/-2) calc(var(--r)/-2) padding-box, 
+    radial-gradient(50% 50%,#000 98%,#0000 101%) 
+      0 0/var(--r) var(--r) space padding-box;
+  background: linear-gradient(135deg,#df3f3e,#e4605f) border-box;
+  color: #fff;
+  text-align: left;
+}
+.left {
+  --_d: 0%;
+  border-left: var(--t) solid #0000;
+  margin-right: var(--t);
+  place-self: start;
+}
+.right {
+  --_d: 100%;
+  border-right: var(--t) solid #0000;
+  margin-left: var(--t);
+  place-self: end;
 }

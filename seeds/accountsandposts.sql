@@ -6,6 +6,9 @@
 -- First, we must delete (drop) all our tables
 DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS users_id_seq;
+DROP TABLE IF EXISTS cheeps;
+DROP SEQUENCE IF EXISTS cheeps_id_seq;
+
 
 -- Then, we recreate them
 CREATE SEQUENCE IF NOT EXISTS users_id_seq;
@@ -28,13 +31,13 @@ CREATE SEQUENCE IF NOT EXISTS cheeps_id_seq;
 CREATE TABLE cheeps (
     id SERIAL PRIMARY KEY,
     content VARCHAR(255),
-    time_posted date,
+    time_posted TIMESTAMP,
     poster_id int
 );
 
 -- Finally, we add any records that are needed for the tests to run
-INSERT INTO cheeps (content,time_posted,poster_id) VALUES ('Signed my new contract! Geordie until I die!','2023-10-13',1);
-INSERT INTO cheeps (content,time_posted,poster_id) VALUES ('We got Bruno in the middle!!!!!','2023-10-13',2);
-INSERT INTO cheeps (content,time_posted,poster_id) VALUES ('Smashing Work Today Lads! Absolutely destroyed PSG','2023-10-13',5);
-INSERT INTO cheeps (content,time_posted,poster_id) VALUES ('Yohan Cayabye Who? Theres only one super sven botman','2023-10-13',4);
-INSERT INTO cheeps (content,time_posted,poster_id) VALUES ('Fill the Gallowgate with Ikea? I can get us a discount!','2023-10-13',3);
+INSERT INTO cheeps (content,time_posted,poster_id) VALUES ('Signed my new contract! Geordie until I die!','2023-03-14 01:01:00',1);
+INSERT INTO cheeps (content,time_posted,poster_id) VALUES ('We got Bruno in the middle!!!!!','2023-03-14 01:01:00',2);
+INSERT INTO cheeps (content,time_posted,poster_id) VALUES ('Smashing Work Today Lads! Absolutely destroyed PSG','2023-03-14 01:01:00',5);
+INSERT INTO cheeps (content,time_posted,poster_id) VALUES ('Yohan Cayabye Who? Theres only one super sven botman','2023-03-14 01:01:00',4);
+INSERT INTO cheeps (content,time_posted,poster_id) VALUES ('Fill the Gallowgate with Ikea? I can get us a discount!','2023-03-14 01:01:00',3);
