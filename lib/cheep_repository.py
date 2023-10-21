@@ -25,7 +25,7 @@ class CheepRepository:
     
     #Find all Cheeps by Hashtag:
     def all_by_hashtag(self,hashtag):
-        rows = self._connection.execute('SELECT cheeps.id, cheeps.content, cheeps.time_posted, users.username FROM hashtag_post_join_table JOIN cheeps ON cheeps.id = hashtag_post_join_table.post_id JOIN hashtags ON hashtags.id = hashtag_post_join_table.hashtag_id JOIN users on users.id = hashtag_post_join_table.poster_id WHERE hashtags.hashtag ILIKE (%s)',[hashtag])   
+        rows = self._connection.execute('SELECT cheeps.id, cheeps.content, cheeps.time_posted, users.username FROM hashtag_post_join_table JOIN cheeps ON cheeps.id = hashtag_post_join_table.post_id JOIN hashtags ON hashtags.id = hashtag_post_join_table.hashtag_id JOIN users on users.id = cheeps.poster_id where hashtags.hashtag ILIKE (%s)',[hashtag])   
         return rows
  
     # # Delete a book by its id

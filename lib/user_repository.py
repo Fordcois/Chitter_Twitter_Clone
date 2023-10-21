@@ -7,7 +7,6 @@ class UserRepository:
 
     # Retrieve all user information
     def all(self):
-        Users = []
         rows = self._connection.execute('Select * from users')   
         return rows
         

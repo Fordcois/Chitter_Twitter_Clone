@@ -34,10 +34,10 @@ def Profile(username):
     return render_template('profile_page.html',cheeps=cheepslist,profile=profile,user=logged_in)
 
 #ProfilePage - Contains All Cheeps by User and their name
-@app.route('/topic', methods=['GET']) 
-def hashtag():
+@app.route('/topic/<hashtag>', methods=['GET']) 
+def hashtag(hashtag):
     cheeprepo=CheepRepository(get_flask_database_connection(app))
-    cheepslist=cheeprepo.all_by_hashtag('#nufc')
+    cheepslist=cheeprepo.all_by_hashtag(hashtag)
     cheepslist.reverse()
     return render_template('hashtag_page.html',cheeps=cheepslist,user=logged_in)
 
@@ -56,8 +56,11 @@ def submit_new_cheep():
     #Finds all Hashtags in content
     hashtags = re.findall(r'#\w+', content)
     for tag in hashtags:
-        #iterate through found list, adds them to the table and the join table
-        NewHashID=hashtagrepo.CreateAndReturnId(tag)
+        #iterate through found list, adds them to the table and the join table - Removes the has symbol from the front
+        if hashtagrepo.already_in_db(tag[1:]) == False:
+            NewHashID=hashtagrepo.CreateAndReturnId(tag[1:])
+        else:
+            NewHashID=hashtagrepo.find_id(tag[1:])
         hashtagrepo.AddJoin(NewHashID,NewPostId)
     return redirect ('/')
 
@@ -116,10 +119,11 @@ def Log_out():
     logged_in = None
     return redirect ('/')
 
-@app.route('/workshop', methods=['GET']) 
-def workshop():
+@app.route('/workshop/<number>', methods=['GET']) 
+def workshop(number):
     hashtagrepo=HashtagRepository(get_flask_database_connection(app))
-    hashtagrepo.create('#Filtration')
+    hashtagrepo.find_id('#filtration')
+    print(hashtagrepo.already_in_db('#filtration'))
     return redirect ('/')
 
 
