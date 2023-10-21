@@ -47,7 +47,7 @@
                 <div style="text-align: {{ 'left' if loop.index is even else 'right' }}">
                 <b> {{ cheep.content }} </b>
                 <br>
-                <i>- {{ cheep.username }}<span style="color:#ddc9c9"><br>{{ cheep.time_posted.strftime('%H:%M on %d-%m-%Y ') }} </span></i>
+                <i>- <a href="/user/{{cheep.username}}">{{ cheep.username }}</a><span style="color:#ddc9c9"><br>{{ cheep.time_posted.strftime('%H:%M on %d-%m-%Y ') }} </span></i>
             </li>
             <br>
         {% endfor %}

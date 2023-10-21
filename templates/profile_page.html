@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Chitter</title>
+    
+    <link href="/static/stylesheet.css" rel="stylesheet">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div class="header">
+        <img alt="Chitter Logo" src="/static/chitter_logo_white_large.png" width="317" height="117" />
+    </div>
+   
+    <div class="content">
+
+        <p><span style="color:#df3f3e"><span style="font-size:48px"><strong>Profile: {{profile.username}}</strong></span></span></p>
+        <p style="margin : 0; padding-top:0;"> <span style="color:#df3f3e">Name: {{profile.name}}</span> </span></p>
+
+
+    <!-- Information regardless of Log-in status -->
+        <p><strong><span style="color:#df3f3e">Viewing {{profile.name}}'s cheeps ... <br>
+            <a href="/">(Back to all Cheeps)</a></span></strong></p>
+        <!-- Speech Bubbles Go Here -->
+        {% for cheep in cheeps %}
+            {% set row_class = 'bubble left' if loop.index is even else 'bubble right' %}
+                <li class="{{ row_class }}">
+                <div style="text-align: {{ 'left' if loop.index is even else 'right' }}">
+                <b> {{ cheep.content }} </b>
+                <br>
+                <i>- <a href="/user/{{cheep.username}}">{{ cheep.username }}</a><span style="color:#ddc9c9"><br>{{ cheep.time_posted.strftime('%H:%M on %d-%m-%Y ') }} </span></i>
+            </li>
+            <br>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
