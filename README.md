@@ -1,69 +1,48 @@
-# Flask HTML Web & Database Project Starter
+# About the Chitter Project
 
-This is a starter project for you to use to start your Flask HTML web & database
-projects.
+## Project Overview
 
-It contains quite a lot of example code. You can use this to see how the various
-parts of the project work, or you can delete it and start from scratch.
+Chitter is a small web application that draws inspiration from Twitter. This project aims to create a Twitter-like experience, allowing users to register accounts, share their thoughts in the form of "Cheeps," and explore content shared by others. Chitter is built using a stack of modern web development technologies, including Python, Flask, CSS, and PostgreSQL.
 
-There are two videos to support:
+## Key Features
 
-* [A demonstration of setting up the project](https://www.youtube.com/watch?v=YStsRfMVx44&t=0s)
-* [A walkthrough of the project codebase](https://www.youtube.com/watch?v=YStsRfMVx44&t=314s) 
+### User Registration and log-ins
 
-## Setup
+Chitter offers a user-friendly registration process, enabling users to create accounts - An account is required to post cheeps.
 
-```shell
-# Clone the repository to your local machine
-; git clone git@github.com:makersacademy/web-applications-in-python-project-starter-html.git YOUR_PROJECT_NAME
+### Cheep Sharing (CRUD)
 
-# Or, if you don't have SSH keys set up
-; git clone https://github.com/makersacademy/web-applications-in-python-project-starter-html.git YOUR_PROJECT_NAME
+Similar to Twitter, Chitter provides a complete Create, Read, Update, Delete (CRUD) system for Cheeps. Users can create new Cheeps, view their own Cheeps, and delete Cheeps if they wish to remove them.
 
-# Enter the directory
-; cd YOUR_PROJECT_NAME
+### Explore Cheeps
 
-# Install dependencies and set up the virtual environment
-; pipenv install
+- **Browse All Cheeps:** Chitter users can explore all the Cheeps shared on the platform, offering access to a wide variety of content.
 
-# Activate the virtual environment
-; pipenv shell
+- **Browse by User:** Users can view Cheeps posted by specific users, making it easy to stay updated with the activities of others.
 
-# Install the virtual browser we will use for testing
-; playwright install
-# If you have problems with the above, contact your coach
+- **Browse by Hashtag:** Chitter allows users to discover Cheeps related to specific topics by searching for and clicking on relevant hashtags.
 
-# Create a test and development database
-; createdb YOUR_PROJECT_NAME
-; createdb YOUR_PROJECT_NAME_test
+### Interactive User Interface
 
-# Open lib/database_connection.py and change the database names
-; open lib/database_connection.py
+Chitter's user interface is designed to be intuitive and responsive, providing an enjoyable and engaging user experience.
 
-# Seed the development database (ensure you have run `pipenv shell` first)
-; python seed_dev_database.py
+## Planned Features
 
-# Run the tests (with extra logging)
-; pytest -sv
+In the pursuit of enhancing Chitter, we have exciting features on the horizon, including:
 
-# Run the app
-; python app.py
-# Now visit http://localhost:5001/emoji in your browser
-```
+- **Ability to Follow/Be Followed by Users:** Planning to introduce a user following system, allowing users to connect with others they find interesting.
 
-If you would like to remove the example code:
+- **'Like' Cheeps:** We're working on adding the ability to 'like' Cheeps. Express your appreciation for a Cheep by giving it a 'like' and let others know your thoughts.
 
-```shell
-; ./remove_example_code.sh
-```
+- **Email Notifications When Tagged:** Developing a feature to send email notifications when you are tagged in a Cheep, so you never miss a mention.
 
+- **Clickable Hashtags:** Make hashtags in Cheeps clickable links to their relevant search pages, making it easy to explore content related to specific topics.
 
-<!-- BEGIN GENERATED SECTION DO NOT EDIT -->
+## Technology Stack
 
----
+- **Backend:** Chitter is powered by Python, with Flask serving as the lightweight web framework.
+- **Database:** PostgreSQL is used for robust data storage and retrieval.
+- **Frontend:** Custom CSS is employed to create a polished and modern design.
 
-**How was this resource?**  
-[😫](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=😫) [😕](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=😕) [😐](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=😐) [🙂](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=🙂) [😀](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=😀)  
-Click an emoji to tell us.
-
-<!-- END GENERATED SECTION DO NOT EDIT -->
+## Change Log
+[22/10] Developed Hashtag filter page - If no results are found will offer you the option to post your own thoughts on the matter. Can be accessed by going to /topic/SEARCHTERM

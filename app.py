@@ -25,7 +25,7 @@ def index():
 
 #ProfilePage - Contains All Cheeps by User and their name
 @app.route('/user/<username>', methods=['GET']) 
-def Profile(username):
+def filter_cheeps_by_profile(username):
     cheeprepo=CheepRepository(get_flask_database_connection(app))
     cheepslist=cheeprepo.all_by(username)
     cheepslist.reverse()
@@ -33,13 +33,13 @@ def Profile(username):
     profile=userrepo.find(username)
     return render_template('profile_page.html',cheeps=cheepslist,profile=profile,user=logged_in)
 
-#ProfilePage - Contains All Cheeps by User and their name
+#Filter by Hashtag Page - Contains All Cheeps by User and their name
 @app.route('/topic/<hashtag>', methods=['GET']) 
-def hashtag(hashtag):
+def filter_cheeps_by_hashtag(hashtag):
     cheeprepo=CheepRepository(get_flask_database_connection(app))
     cheepslist=cheeprepo.all_by_hashtag(hashtag)
     cheepslist.reverse()
-    return render_template('hashtag_page.html',cheeps=cheepslist,user=logged_in)
+    return render_template('hashtag_page.html',cheeps=cheepslist,user=logged_in,topic=hashtag)
 
 
 # New Cheep submission
@@ -88,8 +88,6 @@ def register_new_user():
     return redirect ('/')
 
 
-
-
 # Directs you to the Login Page
 @app.route('/login', methods=['get']) 
 def direct_to_login_page():
@@ -119,6 +117,7 @@ def Log_out():
     logged_in = None
     return redirect ('/')
 
+####TESTING PAGE - Not For Development ###
 @app.route('/workshop/<number>', methods=['GET']) 
 def workshop(number):
     hashtagrepo=HashtagRepository(get_flask_database_connection(app))

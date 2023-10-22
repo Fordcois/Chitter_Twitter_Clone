@@ -12,10 +12,24 @@
         <img alt="Chitter Logo" src="/static/chitter_logo_white_large.png" width="317" height="117" />
     </div>
     <div class="content">
+        <!-- If there are no results -->
+        {% if cheeps | length == 0 %}
+        <p><span style="color:#df3f3e"><span style="font-size:48px"><strong>Nobody is Cheeping about #{{topic}}!</strong></span></span></p>
+        <p><span style="color:#df3f3e">Got Something to say? <a href="/">(Back to all Cheeps)</a></span></p>
+        
+        <!-- This is the cheep Box -->
+        <form action="/newcheep" method="post">
+        <textarea  id='content' name="content" placeholder="#{{topic}}" cols="10" rows="3"></textarea>
+        <br>
+        <br>
+        <input type="submit" value="Cheep">
+        </form>
+        
+        
+        
+        {% else %}
+        <p><span style="color:#df3f3e"><span style="font-size:48px"><strong>Here's what people are saying about #{{topic}}</strong></span></span></p>
 
-        <p><span style="color:#df3f3e"><span style="font-size:48px"><strong>Looking at a Specific Topic</strong></span></span></p>
-
-    <!-- Information regardless of Log-in status -->
         <p><strong><span style="color:#df3f3e">Viewing just some cheeps ... <br>
             <a href="/">(Back to all Cheeps)</a></span></strong></p>
         <!-- Speech Bubbles Go Here -->
@@ -29,6 +43,8 @@
             </li>
             <br>
         {% endfor %}
+                {% endif %}
+
     </div>
 
 </body>
