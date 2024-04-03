@@ -46,3 +46,41 @@ In the pursuit of enhancing Chitter, we have exciting features on the horizon, i
 
 ## Change Log
 [22/10] Developed Hashtag filter page - If no results are found will offer you the option to post your own thoughts on the matter. Can be accessed by going to /topic/SEARCHTERM
+
+## Project Installation & Set-up
+Before proceeding, ensure you have an active [PostgreSQL server](https://www.postgresql.org/) to store the information.
+
+### Clone Repo
+Clone the Repository  Clone the repository to your local machine:  
+```shell 
+git clone <repository_url> 
+cd <repository_name>
+```
+
+### Install Dependencies and Set up the Virtual Environment
+Install dependencies using pipenv:
+```
+pipenv install
+```
+Activate the virtual environment:
+```
+pipenv shell
+```
+
+### Set up Test and Development Databases
+Create databases for testing and development:
+```shell
+createdb chitterdb
+createdb chitterdb_test
+```
+
+### Run Tests
+Run tests with extra logging:
+```pytest -sv```
+
+### Run the Web Server
+Start the Flask web server:
+```python app.py```
+
+### Visit the Application
+Open your browser and navigate to [http://localhost:5001](http://localhost:5001) to access the application.
